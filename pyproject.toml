@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "mat_llm_cli"
 version = "0.0.1"
-description = "AContains useful CLI tools s lto leverage LLM APIs."
+description = "Contains useful CLI tools to leverage LLM APIs."
 authors = [
   { name = "Matthieu Dagommer" },
 ]
@@ -21,6 +21,10 @@ dependencies = [
     "pytest",
     "python-dotenv",
     "ruff",
+    "GitPython",
+    "openai",
+    "pyprojroot",
+    "typer",
 ]
 requires-python = "~=3.10.0"
 
