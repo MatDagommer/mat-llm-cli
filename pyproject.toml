@@ -41,3 +41,23 @@ extend-select = ["I"]  # Add import sorting
 known-first-party = ["mat_llm_cli"]
 force-sort-within-sections = true
 
+
+[tool.vulture]
+paths = ["mat_llm_cli"]
+min_confidence = 80
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = false
+ignore-magic = false
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = false
+fail-under = 100
+exclude = ["tests"]
+ignore-regex = ["^get$", "^mock_.*", ".*BaseClass.*"]
+verbose = 2
+quiet = false
+whitelist-regex = []
+color = true
