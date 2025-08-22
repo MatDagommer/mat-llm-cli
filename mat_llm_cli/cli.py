@@ -2,20 +2,22 @@
 
 from pathlib import Path
 
+import typer
 from openai import AzureOpenAI
 from pyprojroot import here
-import typer
 
+from mat_llm_cli.__version__ import __version__ as VERSION
 from mat_llm_cli.utils import compose_release_notes
 
 app = typer.Typer()
 
+
 @app.command()
 def write_release_notes(
-    endpoint: str, 
-    api_key: str, 
+    endpoint: str,
+    api_key: str,
     api_version: str,
-    release_notes_dir: Path = Path("./docs/releases"), 
+    release_notes_dir: Path = Path("./docs/releases"),
 ):
     """Write release notes for the latest two tags to the release notes directory.
 
@@ -34,15 +36,17 @@ def write_release_notes(
     if len(tags) == 0:
         # No tags, get all commit messages from the very first commit
         log_info = repo.git.log()
+        latest_tag = VERSION
     elif len(tags) == 1:
         # Only one tag, get all commit messages from that tag to the current commit
         tag = tags[0]
         log_info = repo.git.log(f"{tag.commit.hexsha}..HEAD")
+        latest_tag = tag.name
     else:
         # More than one tag, get all commit messages between the last two tags
         tag1, tag2 = tags[-2], tags[-1]
         log_info = repo.git.log(f"{tag1.commit.hexsha}..{tag2.commit.hexsha}")
-
+        latest_tag = tag2.name
 
     client = AzureOpenAI(
         azure_endpoint=endpoint,
@@ -51,10 +55,8 @@ def write_release_notes(
     )
 
     response = client.chat.completions.create(
-        model="gpt-4",
-        messages=[
-            {"role": "user", "content": compose_release_notes(log_info)}
-        ]
+        model="gpt-4o",
+        messages=[{"role": "user", "content": compose_release_notes(log_info)}],
     )
 
     notes = response.choices[0].message.content
@@ -65,5 +67,5 @@ def write_release_notes(
     trimmed_notes = notes.rstrip() + "\n"
 
     # Write release notes to the file
-    with open(release_notes_dir / f"{tag2.name}.md", "w+") as f:
+    with open(release_notes_dir / f"{latest_tag}.md", "w+") as f:
         f.write(trimmed_notes)
