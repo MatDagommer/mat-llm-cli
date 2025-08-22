@@ -63,8 +63,14 @@ def write_release_notes(
 
     # Create release_notes_dir if it doesn't exist:
     release_notes_dir.mkdir(parents=True, exist_ok=True)
+
+    # Extract notes content
+    start = notes.find("---START---") + len("---START---")
+    end = notes.find("---FINISH---")
+    extracted_notes = notes[start:end].strip()
+
     # Ensure only one newline at the end of the file
-    trimmed_notes = notes.rstrip() + "\n"
+    trimmed_notes = extracted_notes.rstrip() + "\n"
 
     # Write release notes to the file
     with open(release_notes_dir / f"{latest_tag}.md", "w+") as f:

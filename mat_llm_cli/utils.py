@@ -1,6 +1,10 @@
 """Utils function."""
 
+
 def compose_release_notes(commit_log: str) -> str:
+    """
+    Compose release notes from the commit log.
+    """
     return f"""Here is a commit log:
 
     # noqa: DAR101
@@ -13,8 +17,7 @@ def compose_release_notes(commit_log: str) -> str:
 
     Follow the following format:
 
-        ## Version <version number>
-
+        ---START---
         <brief summary of the new version>
 
         ### New Features
@@ -29,4 +32,5 @@ def compose_release_notes(commit_log: str) -> str:
         ### Deprecations
 
         - <describe in plain English> (<commit's first 6 letters>) (<commit author>)
+        ---FINISH---
     """
