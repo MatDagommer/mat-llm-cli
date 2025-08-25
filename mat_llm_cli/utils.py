@@ -17,8 +17,10 @@ def compose_release_notes(commit_log: str) -> str:
 
     Follow the following format:
 
+        Version <version_number>
+
         ---START---
-        <brief summary of the new version>
+        <paragraph that is a brief summary of the new version>
 
         ### New Features
 
