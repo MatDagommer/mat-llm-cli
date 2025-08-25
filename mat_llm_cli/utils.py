@@ -24,15 +24,15 @@ def compose_release_notes(commit_log: str) -> str:
 
         ### New Features
 
-        - <describe in plain English> (<commit's first 6 letters>) (<commit author>)
-        - <describe in plain English> (<commit's first 6 letters>) (<commit author>)
+        - <describe in plain English> (<commit's first 7 letters>) (<commit author>)
+        - <describe in plain English> (<commit's first 7 letters>) (<commit author>)
 
         ### Bug Fixes
 
-        - <describe in plain English> (<commit's first 6 letters>) (<commit author>)
+        - <describe in plain English> (<commit's first 7 letters>) (<commit author>)
 
         ### Deprecations
 
-        - <describe in plain English> (<commit's first 6 letters>) (<commit author>)
+        - <describe in plain English> (<commit's first 7 letters>) (<commit author>)
         ---FINISH---
     """
