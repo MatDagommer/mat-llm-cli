@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "mat_llm_cli"
-version = "0.1.1"
+version = "0.1.2"
 description = "Contains useful CLI tools to leverage LLM APIs."
 authors = [
   { name = "Matthieu Dagommer" },
