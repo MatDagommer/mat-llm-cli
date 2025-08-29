@@ -10,3 +10,7 @@
 </p>
 
 Contains useful CLI tools to leverage LLM APIs.
+
+```
+uvx mat-llm-cli 
+```
